@@ -30,8 +30,8 @@ function solution(numbers, hand) {
         else { //소속하지 않을 경우.....
             nextPos = [rest.indexOf(nextNum),1];
             //console.log(nextPos);
-            let Ldist = Math.abs(Lpos[0]-nextPos[0])+Math.abs(Lpos[1]-nextPos[1],2);
-            let Rdist = Math.abs(Rpos[0]-nextPos[0])+Math.abs(Rpos[1]-nextPos[1],2);
+            let Ldist = Math.abs(Lpos[0]-nextPos[0])+Math.abs(Lpos[1]-nextPos[1]);
+            let Rdist = Math.abs(Rpos[0]-nextPos[0])+Math.abs(Rpos[1]-nextPos[1]);
             
             if (Ldist<Rdist){
                 Lpos = nextPos;
