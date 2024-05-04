@@ -1,18 +1,33 @@
 function solution(order) {
-    let result = 0;
-    let idx = 0;
+
+    let count = 0;
     let stack = [];
-    for (let i=1; i<=order.length; i++){
-        stack.push(i);
+    
+    let now = 1;    
+    let idx = 0;    
+    
+    let flag = false;
+    while(!flag && idx<order.length){
+        let first = order[idx];
+        console.log(first);
+        for (let i=now; i<=first; i++){
+            stack.push(i);
+        }
+        now = first+1;
         
-        while(stack.length>0 && stack[stack.length-1]===order[idx]){
+        while(stack.length>0){
+            if (stack[stack.length-1]!==order[idx]){
+                flag = true;
+                break;
+            }
             stack.pop();
             idx++;
-            result++;
+            count++;
         }
+        
     }
-    return result;
-
+    console.log(count);
+    return count;
 }
 /*
 영재는 택배상자를 트럭에 싣는 일.
