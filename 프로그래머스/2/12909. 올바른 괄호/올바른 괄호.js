@@ -1,22 +1,22 @@
 function solution(s){
-    s = s.split("");
-    let idx = 0;
-    let stack = [];
+    var answer = true;
+    let idx=0;
+    let stack = []; //'('가 쌓일 용
     while(idx<s.length){
-        if (s[idx]==='(') stack.push('(');
-        else {
-            if (stack[stack.length-1]==='(') stack.pop();
+        while(s[idx]==='('){
+            stack.push(s[idx++]);
+        } 
+        //while이 끝난 경우 
+        //1)모든 s요소가 '('일 때
+        //2) ')'를 만났을 때
+        if (s[idx]===')'){
+            if (stack.length>0 && stack[stack.length-1]==='('){
+                stack.pop();
+                idx++;
+            }
             else return false;
-        }
-        idx++;
+        }  
     }
-    
-    console.log(stack);
-    return stack.length===0;
+    if (stack.length>0) return false;
+    else return true;
 }
-
-/*
-stack에 남아있는 것이 없어야 한다.
-(일 경우 push
-)일 경우 stack의 top이 (이면 pop. 아니면 break
-*/
