@@ -1,13 +1,14 @@
 function solution(s) {
-    s = s.split(" ").map((v)=>v.split(""));
+    let str1 = s.toLowerCase();
+    console.log(str1);
+    let arr = str1.split(" ").map((word)=>word.split("").map((alpha,idx)=>{
+        if (idx===0 && isNaN(+alpha)) return alpha.toUpperCase();
+        return alpha;
+    }).join("")).join(" ");
+    console.log(arr);
+    return arr;
     
-  
-    
-    s = s.map((v)=>v.map((s,i)=>{
-        if (i===0) return s.toUpperCase();
-        else return s.toLowerCase();
-    }).join("")).join(" ")  
-    console.log(s);
-    return s;
-
+    var answer = '';
+    return answer;
 }
+//문자열 s가 주어졌을 때 s를 JadenCase로 바꾼 문자열을 return 하라
