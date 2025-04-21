@@ -1,22 +1,31 @@
 function solution(s){
-    var answer = true;
+    s = s.split("");
+    console.log(s);
     let idx=0;
-    let stack = []; //'('가 쌓일 용
+    let stack = [];
+    
     while(idx<s.length){
-        while(s[idx]==='('){
-            stack.push(s[idx++]);
-        } 
-        //while이 끝난 경우 
-        //1)모든 s요소가 '('일 때
-        //2) ')'를 만났을 때
-        if (s[idx]===')'){
-            if (stack.length>0 && stack[stack.length-1]==='('){
+        let str = s[idx];
+        if (str==='('){
+            stack.push(str);
+            idx++;
+        } else { //str===')'
+            if (idx===0) return false;
+            
+            const top = stack[stack.length-1];
+            if (top==='('){
                 stack.pop();
                 idx++;
-            }
-            else return false;
-        }  
+            } else return false;
+        }
     }
-    if (stack.length>0) return false;
-    else return true;
+    
+    if (stack.length!==0) return false;
+    return true;
+
 }
+
+/*
+
+
+*/
