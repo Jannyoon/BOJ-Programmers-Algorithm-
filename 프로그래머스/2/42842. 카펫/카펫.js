@@ -1,18 +1,26 @@
 function solution(brown, yellow) {
-    let xPLUSy = parseInt(brown/2)+2;
-    let xy = yellow-4 + 2*xPLUSy;
+    let halfBrown = parseInt(brown/2);
     
-    let x=xy;
-    let y=1;
+    //x+y = halfBrown;
+    //y*(x-2) = yellow;
+    //y = halfBrown-x;
+    //(halfBrown-x) * (x-2) = yellow;
     
-    for (let y=1; y<=xy; y++){
-        if (xy%y!==0) continue;
-        if (y+parseInt(xy/y)===xPLUSy) return [xy/y, y];
+    //가로 길이 최소3개부터 시작
+    let ans = 3; //x
+    while(true){
+        let calc = (halfBrown-ans)*(ans-2);
+        if (calc===yellow) break;
+        ans++;
     }
-  
+    
+    let result = [ans, halfBrown-ans+2];
+    result.sort((a,b)=>b-a)
+    return result;
 }
-/*
-중앙은 노란색, 테두리 1줄은 갈색
-아까 본 카펫의 노란색과 갈색으로 색칠된 격자의 개수는 기억한다고...?
 
+/*
+중앙은 노랑, 테두리 1줄은 갈색
+
+카펫의 가로 길이는 세로 길이와 같거나 세로 길이보다 깁니다. 가로>=세로
 */
