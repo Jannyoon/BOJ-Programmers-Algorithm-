@@ -1,47 +1,48 @@
 let fs = require('fs');
 let [n, ...input] = fs.readFileSync('/dev/stdin').toString().trim().split("\n");
 
-n=+n;
-input = input.map((v)=>v.split("").map(Number));
+n = +n;
+input = input.map(v => v.split("").map(Number));
 
-let result = [];
-let cnt = 0; //단지 개수 도출용
+//상, 하, 좌, 우
+let nx = [-1, 1, 0, 0];
+let ny = [0, 0, -1, 1]; 
+
+let ans = 0;
+let houses = [];
 
 for (let i=0; i<n; i++){
   for (let j=0; j<n; j++){
-    if (input[i][j]===1){
-      if (dfs(i,j)) cnt++;
-    }
+    if (input[i][j]===0) continue;
+    if (dfs(i,j)) ans++;
   }
 }
 
-function dfs(i,j){
-  let nrow = [-1,1,0,0]; //상,하,좌,우
-  let ncol = [0,0,-1,1]; //상,하,좌,우
 
-  let stack = [[i,j]];
-  let check = 1; //단지 내 집 갯수
+function dfs(i,j){
+  let cnt = 0;
+  let stack = [[i,j]]
 
   while(stack.length>0){
-    let [x,y] = stack.pop();
-    if (input[x][y]!==0) input[x][y] = 0; //처음 방문처리
+    let [nowx, nowy] = stack.pop();
+    cnt++;
 
+    if (input[nowx][nowy]===1) input[nowx][nowy] = 0;
     for (let k=0; k<4; k++){
-      let nx = x+nrow[k];
-      let ny = y+ncol[k];
+      let [nextx, nexty] = [nowx + nx[k], nowy+ny[k]];
 
-      if (nx<=-1 || nx>=n || ny<=-1 || ny>=n) continue;
-      if (input[nx][ny]===0) continue;
-      if (input[nx][ny]===1){
-        check++;
-        input[nx][ny] = 0;
-        stack.push([nx,ny]);
+      if (nextx<=-1 || nextx>=n || nexty<=-1 || nexty>=n) continue;
+      if (input[nextx][nexty]===0) continue;
+      if (input[nextx][nexty]===1){
+        stack.push([nextx, nexty])
+        input[nextx][nexty] = 0; //방문처리
       }
     }
   }
-  result.push(check); 
+
+  houses.push(cnt);
   return true;
 }
 
-
-console.log(cnt+"\n"+result.sort((a,b)=>a-b).join("\n"));
+if (houses.length===0) houses.push(0);
+console.log(ans+"\n"+houses.sort((a,b)=>a-b).join("\n"));
