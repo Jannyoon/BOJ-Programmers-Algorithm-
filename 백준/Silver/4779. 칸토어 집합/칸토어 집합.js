@@ -31,14 +31,10 @@ function recursive(state, start, end){
 
     if (state==='line'){
         return ''+recursive('line', startIdx[0], startIdx[1])
-            + recursive('blank', midIdx[0], midIdx[1])
+            + " ".repeat(count)
             + recursive('line', endIdx[0], endIdx[1])
 
-    } else {
-        return ''+recursive('blank', startIdx[0], startIdx[1])
-            + recursive('blank', midIdx[0], midIdx[1])
-            + recursive('blank', endIdx[0], endIdx[1])
-    }
+    } 
 }
 
 console.log(result.join("\n"))
