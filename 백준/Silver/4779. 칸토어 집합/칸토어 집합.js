@@ -12,7 +12,7 @@ for (let i=0; i<input.length; i++){
         let endIdx = [2*count, num-1]
 
         let answer = recursive('line', startIdx[0], startIdx[1])
-                    + recursive('blank', midIdx[0], midIdx[1])
+                    + " ".repeat(num/3)
                     + recursive('line', endIdx[0], endIdx[1])
         result.push(answer)
     }  
